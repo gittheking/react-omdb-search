@@ -18,6 +18,30 @@
   font-size: large;
 }
 
+#prev-button {
+  background-color: #E95346;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px #222;
+  color: #FAFAFA;
+  font-size: 25px;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+#next-button {
+  background-color: #E95346;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px #222;
+  color: #FAFAFA;
+  font-size: 25px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

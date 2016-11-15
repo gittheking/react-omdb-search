@@ -11,6 +11,7 @@ class MovieList extends Component {
           title={movie.Title}
           year={movie.Year}
           poster={movie.Poster}
+          imdbID={movie.imdbID}
         />
       );
     });

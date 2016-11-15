@@ -9,7 +9,9 @@ class App extends Component {
 
     this.state = {
       searchTerm: '',
-      movies: []
+      movies: [],
+      currentPage: 1,
+      totalResults: 0
     }
   }
 
@@ -19,16 +21,66 @@ class App extends Component {
     });
   }
 
-  handleSubmitSearch(e) {
+  handleSubmitSearch() {
     fetch(`http://www.omdbapi.com/?s=${this.state.searchTerm}`)
     .then(r => r.json())
     .then((data) => {
       this.setState({
-        movies: data.Search
+        movies: data.Search,
+        totalResults: data.totalResults
       });
-      console.log(this.state.movies);
     })
     .catch(err => console.log('Error: ',err));
+  }
+
+  handleSubmitNextPage() {
+    fetch(`http://www.omdbapi.com/?s=${this.state.searchTerm}&page=${this.state.currentPage + 1}`)
+    .then(r => r.json())
+    .then((data) => {
+      this.setState({
+        movies: data.Search,
+        currentPage: this.state.currentPage + 1
+      });
+    })
+    .catch(err => console.log('Error: ',err));
+  }
+
+  handleSubmitPrevPage() {
+    fetch(`http://www.omdbapi.com/?s=${this.state.searchTerm}&page=${this.state.currentPage - 1}`)
+    .then(r => r.json())
+    .then((data) => {
+      this.setState({
+        movies: data.Search,
+        currentPage: this.state.currentPage - 1
+      });
+    })
+    .catch(err => console.log('Error: ',err));
+  }
+
+  displayNext() {
+    if (this.state.totalResults > this.state.currentPage * 10) {
+      return (
+          <button
+            id="next-button"
+            onClick={() => this.handleSubmitNextPage()}
+          >
+            Next Page
+          </button>
+        );
+    }
+  }
+
+  displayPrev() {
+    if (this.state.currentPage > 1) {
+      return (
+          <button
+            id="prev-button"
+            onClick={() => this.handleSubmitPrevPage()}
+          >
+            Previous Page
+          </button>
+        );
+    }
   }
 
   render() {
@@ -37,11 +89,12 @@ class App extends Component {
         <SearchHeader
           searchTerm={this.state.searchTerm}
           handleUpdateSearch={event => this.handleUpdateSearch(event)}
-          handleSubmitSearch={event => this.handleSubmitSearch(event)}
+          handleSubmitSearch={()=> this.handleSubmitSearch()}
         />
         <MovieList 
           movies={this.state.movies}
         />
+        {this.displayPrev()}{this.displayNext()}
       </div>
     );
   }
