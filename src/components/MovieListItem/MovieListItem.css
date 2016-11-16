@@ -1,6 +1,31 @@
 .movie-item {
   background-color: #E6F0FD;
   box-shadow: 0 1px 1px #333;
-  margin: 5px;
-  width: 30%;
+  color: #393939;
+  margin: 10px;
+  padding: 10px 0 45px 0;
+  position: relative;
+  width: 20%;
+}
+
+.movie-item img {
+  box-shadow: 0 1px 1px #333;
+  width: 90%;
+}
+
+.movie-item a {
+  background-color: #E85C53;
+  bottom: 0;
+  box-shadow: 0 1px 1px #333;
+  color: #FAFAFA;
+  display: block;
+  font-size: 30px;
+  line-height: 40px;
+  position: absolute;
+  text-decoration: none;
+  width: 100%;
+}
+
+.movie-item a:hover {
+  text-decoration: underline;
 }

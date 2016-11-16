@@ -24,6 +24,7 @@
   border-radius: 2px;
   box-shadow: 0 2px 2px #222;
   color: #FAFAFA;
+  cursor: pointer;
   font-size: 25px;
   position: fixed;
   bottom: 20px;
@@ -36,6 +37,7 @@
   border-radius: 2px;
   box-shadow: 0 2px 2px #222;
   color: #FAFAFA;
+  cursor: pointer;
   font-size: 25px;
   position: fixed;
   bottom: 20px;

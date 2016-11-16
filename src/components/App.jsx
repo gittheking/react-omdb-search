@@ -16,42 +16,20 @@ class App extends Component {
   }
 
   handleUpdateSearch(e) {
+    console.log(e.key);
     this.setState({
       searchTerm: e.target.value
     });
   }
 
-  handleSubmitSearch() {
-    fetch(`http://www.omdbapi.com/?s=${this.state.searchTerm}`)
+  handleSubmitSearch(page=1) {
+    fetch(`http://www.omdbapi.com/?s=${this.state.searchTerm}&page=${page}`)
     .then(r => r.json())
     .then((data) => {
       this.setState({
         movies: data.Search,
-        totalResults: data.totalResults
-      });
-    })
-    .catch(err => console.log('Error: ',err));
-  }
-
-  handleSubmitNextPage() {
-    fetch(`http://www.omdbapi.com/?s=${this.state.searchTerm}&page=${this.state.currentPage + 1}`)
-    .then(r => r.json())
-    .then((data) => {
-      this.setState({
-        movies: data.Search,
-        currentPage: this.state.currentPage + 1
-      });
-    })
-    .catch(err => console.log('Error: ',err));
-  }
-
-  handleSubmitPrevPage() {
-    fetch(`http://www.omdbapi.com/?s=${this.state.searchTerm}&page=${this.state.currentPage - 1}`)
-    .then(r => r.json())
-    .then((data) => {
-      this.setState({
-        movies: data.Search,
-        currentPage: this.state.currentPage - 1
+        totalResults: data.totalResults,
+        currentPage: page
       });
     })
     .catch(err => console.log('Error: ',err));
@@ -62,7 +40,7 @@ class App extends Component {
       return (
           <button
             id="next-button"
-            onClick={() => this.handleSubmitNextPage()}
+            onClick={() => this.handleSubmitSearch(this.state.currentPage + 1)}
           >
             Next Page
           </button>
@@ -75,7 +53,7 @@ class App extends Component {
       return (
           <button
             id="prev-button"
-            onClick={() => this.handleSubmitPrevPage()}
+            onClick={() => this.handleSubmitSearch(this.state.currentPage - 1)}
           >
             Previous Page
           </button>
@@ -94,7 +72,8 @@ class App extends Component {
         <MovieList 
           movies={this.state.movies}
         />
-        {this.displayPrev()}{this.displayNext()}
+        {this.displayPrev()}
+        {this.displayNext()}
       </div>
     );
   }
