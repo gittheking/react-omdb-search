@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './MovieListItem.css';
 
-class MovieListItem extends Component {
-  render() {
-    return (
+const MovieListItem = props => (
       <div className="movie-item">
-        <h2>{`${this.props.title} (${this.props.year})`}</h2>
-        <img src={this.props.poster} alt={this.props.title} />
-        <a href={`http://imdb.com/title/${this.props.imdbID}`}>More Info</a>
+        <h2>{`${props.title} (${props.year})`}</h2>
+        <img src={props.poster} alt={props.title} />
+        <a href={`http://imdb.com/title/${props.imdbID}`}>More Info</a>
       </div>
     );
-  }
-}
 
 export default MovieListItem;
